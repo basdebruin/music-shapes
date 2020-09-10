@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="music-shapes-game"
 config/icon="res://icon.png"
 
+[autoload]
+
+MusicManager="*res://Audio/MusicManager.gd"
+
 [display]
 
 window/dpi/allow_hidpi=true
