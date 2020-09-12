@@ -2,7 +2,7 @@ extends Node2D
 
 
 # shape spawn timer variables
-const SPAWN_INTERVAL   : float = 4.0   # seconds
+const SPAWN_INTERVAL   : float = 2.0   # in seconds
 var timeSinceLastSpawn : float = 0.0
 
 # shape vars
@@ -28,9 +28,5 @@ func _process(delta):
 func spawn_shape():
 	var shape_instance = shape_scene.instance()
 	add_child(shape_instance)
-	# position
-	shape_instance.set_position(Vector2(
-		rand_range(50, SCREEN_WIDTH - 50), 
-		SCREEN_HEIGHT + 50))
 	# log
 	print("SPAWNED SHAPE")

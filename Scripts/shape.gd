@@ -18,19 +18,49 @@ enum SHAPES {
 	CIRCLE  = 1,
 	POLY    = 2
 }
+# preloaded images
+const IMAGES = [
+	preload("res://Assets/Shapes/box_green.png"),
+	preload("res://Assets/Shapes/circle_red.png"),
+	preload("res://Assets/Shapes/polygon_blue.png")
+]
+
 
 # VARIABLES
 var shape = SHAPES.CIRCLE
 var timeSinceSpawn : float = 0.0  # to prevent instant removal
 
-# calc rand begining vel
 var vel : Vector2 = Vector2(0, 0)
+
+var vel_rotation : float = 0
+
+
 
 func _ready():
 	# set initial velocity
 	var vel_x : float =  rand_range(-VEL_MIN*X_MULT, VEL_MIN*X_MULT)
 	var vel_y : float = -rand_range(VEL_MIN,  VEL_MAX)
 	vel = Vector2(vel_x, vel_y)
+	
+	# set random position 
+	# with margin of 100
+	set_position(Vector2(
+		rand_range(100, SCREEN_WIDTH - 100), 
+		SCREEN_HEIGHT + 100))
+		
+	# set random rotation
+	# and rotational movement
+	rotation = rand_range(0, 360)
+	vel_rotation = vel_x * 0.005  # give random swing of rotation based on x movement
+	
+	# set image texture
+	shape = randi() % len(SHAPES)   # random index
+	$Sprite.set_texture(IMAGES[shape])
+	
+	# init AudioPlayer
+	init_sound()
+
+
 
 # movement process
 func _physics_process(delta):
@@ -38,13 +68,51 @@ func _physics_process(delta):
 	vel = move_and_slide(vel, Vector2.UP)
 	# add gravity
 	vel.y += GRAVITY * delta
+	# a little rotation
+	rotation += vel_rotation
+	vel_rotation *= .98
 	
 	# check if above 0
-	if timeSinceSpawn > 1.0 and position.y > SCREEN_HEIGHT:
-		self.went_offscreen()
+	if timeSinceSpawn > 1.0 and position.y > SCREEN_HEIGHT + 50:
+		self.destroy()
 	else:
 		timeSinceSpawn += delta
 
-func went_offscreen():
-	print("OFF SCREEN")
+# Input Event
+func _input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton          \
+		and event.button_index == BUTTON_LEFT  \
+		and event.pressed:
+			self.on_click(event)
+
+
+
+
+func on_click(event):
+	# play sound
+	self.play_sound()
+	print("Playing Sound")
+	
+	# add a little extra movement
+	vel.x *= 10
+	vel.y -= 100
+
+
+func destroy():
+	print("Destroyed self")
 	get_parent().remove_child(self)
+
+
+func init_sound():
+	# load audio files based on shape
+	if   shape == SHAPES.BOX:
+		$AudioPlayer.stream = load("res://Sounds/Temp/OneShot1.wav")
+	elif shape == SHAPES.CIRCLE:
+		$AudioPlayer.stream = load("res://Sounds/Temp/OneShot2.wav")
+	elif shape == SHAPES.POLY:
+		$AudioPlayer.stream = load("res://Sounds/Temp/OneShot3.wav")
+
+
+func play_sound():
+	$AudioPlayer.play()
+	

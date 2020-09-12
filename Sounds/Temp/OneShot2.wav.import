@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/OneShot2.wav-f98585dc75e4b6634c59faa9e2bead6a.sample"
+
+[deps]
+
+source_file="res://Sounds/Temp/OneShot2.wav"
+dest_files=[ "res://.import/OneShot2.wav-f98585dc75e4b6634c59faa9e2bead6a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
