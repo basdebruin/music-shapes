@@ -72,6 +72,10 @@ func _physics_process(delta):
 	rotation += vel_rotation
 	vel_rotation *= .98
 	
+	# check collision
+	if get_slide_count() > 0:
+		self.on_collision()
+	
 	# check if above 0
 	if timeSinceSpawn > 1.0 and position.y > SCREEN_HEIGHT + 50:
 		self.destroy()
@@ -88,10 +92,11 @@ func _input_event(viewport, event, shape_idx):
 
 
 
+# custom functions
+
 func on_click(event):
 	# play sound
 	self.play_sound()
-	print("Playing Sound")
 	
 	# add a little extra movement
 	vel.x *= 10
@@ -103,6 +108,14 @@ func destroy():
 	get_parent().remove_child(self)
 
 
+func on_collision():
+	# play sound, check if playing to prevent glitch
+	# not a perfect solution
+	if not $AudioPlayer.playing:
+		self.play_sound()
+
+
+# SOUND
 func init_sound():
 	# load audio files based on shape
 	if   shape == SHAPES.BOX:

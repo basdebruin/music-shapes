@@ -2,7 +2,7 @@ extends Node2D
 
 
 # shape spawn timer variables
-const SPAWN_INTERVAL   : float = 2.0   # in seconds
+const SPAWN_INTERVAL   : float = 1.0   # in seconds
 var timeSinceLastSpawn : float = 0.0
 
 # shape vars
