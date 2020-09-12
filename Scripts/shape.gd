@@ -1,8 +1,9 @@
 extends KinematicBody2D
 
 # CONSTANTS
-const VEL_MIN : int = 500
-const VEL_MAX : int = 600
+const VEL_MIN : int   = 500
+const VEL_MAX : int   = 600
+const X_MULT  : float = .2  # x variation multiplier
 
 const GRAVITY : float = 300.0
 
@@ -27,7 +28,7 @@ var vel : Vector2 = Vector2(0, 0)
 
 func _ready():
 	# set initial velocity
-	var vel_x : float =  rand_range(-VEL_MIN*.1, VEL_MIN*.1)
+	var vel_x : float =  rand_range(-VEL_MIN*X_MULT, VEL_MIN*X_MULT)
 	var vel_y : float = -rand_range(VEL_MIN,  VEL_MAX)
 	vel = Vector2(vel_x, vel_y)
 
