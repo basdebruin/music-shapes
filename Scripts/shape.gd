@@ -96,7 +96,7 @@ func _input_event(viewport, event, shape_idx):
 
 func on_click(event):
 	# play sound
-	self.play_sound()
+	MusicManager.shape.play_random_sound()
 	
 	# add a little extra movement
 	vel.x *= 10
