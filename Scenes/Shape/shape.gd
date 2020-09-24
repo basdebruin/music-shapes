@@ -83,6 +83,7 @@ func _physics_process(delta):
 		self.destroy()
 	else:
 		timeSinceSpawn += delta
+	
 
 # Input Event
 func _input_event(_viewport, event, _shape_idx):
@@ -90,6 +91,7 @@ func _input_event(_viewport, event, _shape_idx):
 		and event.button_index == BUTTON_LEFT  \
 		and event.pressed:
 			self.on_click(event)
+		
 
 
 
@@ -101,7 +103,7 @@ func on_click(_event):
 	MusicManager.shape.play_random_sound()
 	
 	# set active
-	activated = true
+	activate()
 	
 	# add a little extra movement
 	vel.x *= 10
@@ -141,4 +143,4 @@ func play_sound():
 func activate():
 	if not activated:
 		activated = true
-		get_node("/root/Main/Score").increment_score()
+		Score.increment_score()

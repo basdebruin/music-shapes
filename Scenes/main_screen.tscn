@@ -2,14 +2,14 @@
 
 [ext_resource path="res://Scenes/ShapeSpawner.gd" type="Script" id=1]
 [ext_resource path="res://ui_theme.tres" type="Theme" id=2]
-[ext_resource path="res://Scenes/Score.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/ScoreLabel.gd" type="Script" id=3]
 
 [node name="Main" type="Node2D"]
 
 [node name="ShapeSpawner" type="Node2D" parent="."]
 script = ExtResource( 1 )
 
-[node name="Score" type="Label" parent="."]
+[node name="ScoreLabel" type="Label" parent="."]
 margin_left = 15.4152
 margin_top = 15.6453
 margin_right = 55.4152
