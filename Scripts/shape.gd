@@ -83,7 +83,7 @@ func _physics_process(delta):
 		timeSinceSpawn += delta
 
 # Input Event
-func _input_event(viewport, event, shape_idx):
+func _input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton          \
 		and event.button_index == BUTTON_LEFT  \
 		and event.pressed:
