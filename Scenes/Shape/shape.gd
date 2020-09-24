@@ -7,6 +7,8 @@ const X_MULT  : float = .2  # x variation multiplier
 
 const GRAVITY : float = 300.0
 
+var activated = false
+
 # screen
 var SCREEN_HEIGHT : int = ProjectSettings.get_setting("display/window/size/height")
 var SCREEN_WIDTH  : int = ProjectSettings.get_setting("display/window/size/width")
@@ -94,9 +96,12 @@ func _input_event(_viewport, event, _shape_idx):
 
 # custom functions
 
-func on_click(event):
+func on_click(_event):
 	# play sound
 	MusicManager.shape.play_random_sound()
+	
+	# set active
+	activated = true
 	
 	# add a little extra movement
 	vel.x *= 10
@@ -104,7 +109,6 @@ func on_click(event):
 
 
 func destroy():
-	print("Destroyed self")
 	get_parent().remove_child(self)
 
 
@@ -113,6 +117,9 @@ func on_collision():
 	# not a perfect solution
 	if not $AudioPlayer.playing:
 		self.play_sound()
+	
+	#set active
+	activated = true
 
 
 # SOUND
@@ -129,3 +136,9 @@ func init_sound():
 func play_sound():
 	$AudioPlayer.play()
 	
+	
+	
+func activate():
+	if not activated:
+		activated = true
+		get_node("/root/Main/Score").increment_score()
