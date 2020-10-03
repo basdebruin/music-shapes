@@ -121,7 +121,7 @@ func on_collision():
 		self.play_sound()
 	
 	#set active
-	activated = true
+	self.activate()
 
 
 # SOUND
@@ -139,8 +139,11 @@ func play_sound():
 	$AudioPlayer.play()
 	
 	
-	
-func activate():
+
+func activate(has_collided : bool = false):
 	if not activated:
 		activated = true
+		# change color
+		$Sprite.modulate = Color(.5, .5, .5)
+		# add to Score
 		Score.increment_score()

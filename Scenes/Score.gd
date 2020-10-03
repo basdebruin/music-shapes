@@ -9,6 +9,6 @@ func change_score(s):
 	score = s
 	
 
-func increment_score():
-	change_score(score + 1)
+func increment_score(amount : int = 1):
+	change_score(score + amount)
 	print("score is now: ", str(score))
