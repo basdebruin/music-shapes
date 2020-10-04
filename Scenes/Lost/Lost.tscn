@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/Lost/Label.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Lost/Lost.gd" type="Script" id=3]
+
+[node name="Lost" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 401.118
+margin_top = 273.037
+margin_right = 604.118
+margin_bottom = 326.037
+theme = ExtResource( 1 )
+text = "You lost but it's cool
+Click to try again →"
+align = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

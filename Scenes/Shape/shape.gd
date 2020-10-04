@@ -111,6 +111,8 @@ func on_click(_event):
 
 
 func destroy():
+	if not activated:
+		Score.decrement_health()
 	get_parent().remove_child(self)
 
 
@@ -140,7 +142,7 @@ func play_sound():
 	
 	
 
-func activate(has_collided : bool = false):
+func activate():
 	if not activated:
 		activated = true
 		# change color
