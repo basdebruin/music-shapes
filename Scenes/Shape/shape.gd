@@ -120,7 +120,7 @@ func on_collision():
 	# play sound, check if playing to prevent glitch
 	# not a perfect solution
 	if not $AudioPlayer.playing:
-		self.play_sound()
+		pass
 	
 	#set active
 	self.activate()

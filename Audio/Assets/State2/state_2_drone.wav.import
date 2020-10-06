@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/state_2_drone.wav-6c3591258f84b51ab005bbc627f7b0cd.sample"
+
+[deps]
+
+source_file="res://Audio/Assets/State2/state_2_drone.wav"
+dest_files=[ "res://.import/state_2_drone.wav-6c3591258f84b51ab005bbc627f7b0cd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
