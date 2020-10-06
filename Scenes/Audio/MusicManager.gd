@@ -5,10 +5,14 @@ onready var ball_hit = $BallHit
 
 onready var chorus = AudioServer.get_bus_effect(AudioServer.get_bus_index("Music"), 0)
 
-func _ready():
-#	$Drone1.start()
-	pass
+onready var tween = $Tween
 
+var tween_active = false
+
+func _ready():
+	$Drone1.start()
+	
+	
 func _input(event):
 	# fade in and out on accept
 	if event.is_action_pressed("ui_accept"):
@@ -19,12 +23,40 @@ func _input(event):
 
 
 func _process(delta):
-	if Score.score > 1:
-		$Drone2.start()
-		
-		#needs tween!!
-#		chorus.dry = 0
-#		chorus.wet = 1
+	_change_chorus()
 	
 	print("drone 2 playing: ", $Drone2.is_playing())
 	
+
+
+func _change_chorus():
+	if Score.score > 1 and tween_active == false:
+		tween_active = true
+		#how many points needs to be changed
+		
+		#!!! drone 2 doesn't start
+		$Drone2.start()
+		
+		#tween chorus to max
+		tween.interpolate_property(
+		chorus,        # context
+		"dry",   # property
+		1,          # from current value
+		0,           # to
+		2.0, # duration
+		1,     # transition type
+		tween.EASE_IN, # ease type
+		0              # delay
+	)
+	
+	tween.interpolate_property(
+		chorus,        # context
+		"wet",   # property
+		0,          # from current value
+		1,           # to
+		2.0, # duration
+		1,     # transition type
+		tween.EASE_IN, # ease type
+		0              # delay
+	)
+	tween.start()
