@@ -117,13 +117,12 @@ func destroy():
 
 
 func on_collision():
-	# play sound, check if playing to prevent glitch
-	# not a perfect solution
-	if not $AudioPlayer.playing:
-		pass
+	# play hit sound
+	if not activated:
+		MusicManager.shape_hit.play_random_sound()
 	
-	#set active
-	self.activate()
+		#set active
+		self.activate()
 
 
 # SOUND

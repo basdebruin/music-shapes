@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Audio/Assets/State1/state_1_drone.wav" type="AudioStream" id=1]
+[ext_resource path="res://Audio/drone.wav" type="AudioStream" id=1]
 [ext_resource path="res://Scenes/Audio/MusicManager.gd" type="Script" id=2]
-[ext_resource path="res://Audio/Assets/BallHit/ball_hit-001.wav" type="AudioStream" id=3]
 [ext_resource path="res://Audio/Assets/BallHit/ball_hit-010.wav" type="AudioStream" id=4]
 [ext_resource path="res://Audio/Assets/BallHit/ball_hit-003.wav" type="AudioStream" id=5]
 [ext_resource path="res://Audio/Assets/BallHit/ball_hit-004.wav" type="AudioStream" id=6]
@@ -13,20 +12,13 @@
 [ext_resource path="res://Audio/Assets/BallHit/ball_hit-002.wav" type="AudioStream" id=11]
 [ext_resource path="res://Audio/Assets/BallHit/ball_hit-009.wav" type="AudioStream" id=12]
 [ext_resource path="res://Audio/Assets/BallHit/ball_hit-005.wav" type="AudioStream" id=13]
-[ext_resource path="res://Audio/Assets/BallHit/ball_hit-011.wav" type="AudioStream" id=14]
 [ext_resource path="res://Audio/Assets/BallHit/ball_hit-007.wav" type="AudioStream" id=15]
 [ext_resource path="res://Audio/Assets/State2/state_2_drone.wav" type="AudioStream" id=16]
-[ext_resource path="res://Scenes/Audio/MusicLayer/MusicLayer.gd" type="Script" id=17]
 
 [node name="MusicManager" type="Node"]
 script = ExtResource( 2 )
 
 [node name="BallClick" parent="." instance=ExtResource( 9 )]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BallClick"]
-stream = ExtResource( 3 )
-volume_db = 7.068
-bus = "Music"
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="BallClick"]
 stream = ExtResource( 11 )
@@ -73,31 +65,29 @@ stream = ExtResource( 4 )
 volume_db = 7.068
 bus = "Music"
 
-[node name="AudioStreamPlayer11" type="AudioStreamPlayer" parent="BallClick"]
-stream = ExtResource( 14 )
-volume_db = 7.068
-bus = "Music"
-
 [node name="BallHit" parent="." instance=ExtResource( 9 )]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BallHit"]
+stream = ExtResource( 7 )
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="BallHit"]
+stream = ExtResource( 15 )
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="BallHit"]
+stream = ExtResource( 8 )
 
 [node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="BallHit"]
+stream = ExtResource( 4 )
 
 [node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="BallHit"]
+stream = ExtResource( 13 )
 
 [node name="Drone1" parent="." instance=ExtResource( 10 )]
 stream = ExtResource( 1 )
 bus = "Music"
 
-[node name="Drone2" type="AudioStreamPlayer" parent="."]
+[node name="Drone2" parent="." instance=ExtResource( 10 )]
 stream = ExtResource( 16 )
-script = ExtResource( 17 )
+bus = "Music"
 
-[node name="Tween" type="Tween" parent="Drone2"]
-
-[node name="Tween" type="Tween" parent="."]
+[node name="ChorusTween" type="Tween" parent="."]

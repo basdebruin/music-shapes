@@ -1,62 +1,71 @@
 extends Node
 
 onready var shape = $BallClick
-onready var ball_hit = $BallHit
+onready var shape_hit = $BallHit
 
 onready var chorus = AudioServer.get_bus_effect(AudioServer.get_bus_index("Music"), 0)
 
-onready var tween = $Tween
+onready var chorus_tween = $ChorusTween
 
-var tween_active = false
+var current_music_layer = 0
 
 func _ready():
+	# ready music layers
 	$Drone1.start()
+	# false so it's not audible at start
+	$Drone2.start(false)
 	
 	
-func _input(event):
-	# fade in and out on accept
-	if event.is_action_pressed("ui_accept"):
-		if $Drone1.active:
+# DEBUG
+#func _input(event):
+#	# fade in and out on accept
+#	if event.is_action_pressed("ui_accept"):
+
+# increase intensity
+func change_music_layer():
+	if Score.health <= 3:
+		if Score.health > 1 and current_music_layer != 1:
+			current_music_layer = 1
+			$Drone2.fade_in()
 			$Drone1.fade_out()
-		else:
-			$Drone1.fade_in()
+		elif Score.health <= 1 and current_music_layer != 2:
+			current_music_layer = 2
+			self.start_chorus()
 
 
-func _process(delta):
-	_change_chorus()
-	
-	print("drone 2 playing: ", $Drone2.is_playing())
-	
+func reset_music_layers():
+	current_music_layer = 0
+	$Drone1.fade_in()
+	$Drone2.fade_out()
+	self.stop_chorus()
 
 
-func _change_chorus():
-	if Score.score > 1 and tween_active == false:
-		tween_active = true
-		#how many points needs to be changed
-		
-		#!!! drone 2 doesn't start
-		$Drone2.start()
-		
-		#tween chorus to max
-		tween.interpolate_property(
+func start_chorus():
+	#tween chorus to max
+	chorus_tween.interpolate_property(
 		chorus,        # context
-		"dry",   # property
-		1,          # from current value
-		0,           # to
-		2.0, # duration
-		1,     # transition type
-		tween.EASE_IN, # ease type
+		"dry",         # property
+		1,             # from current value
+		0,             # to
+		2.0,           # duration
+		1,             # transition type
+		chorus_tween.EASE_IN, # ease type
 		0              # delay
 	)
 	
-	tween.interpolate_property(
+	chorus_tween.interpolate_property(
 		chorus,        # context
-		"wet",   # property
-		0,          # from current value
-		1,           # to
-		2.0, # duration
-		1,     # transition type
-		tween.EASE_IN, # ease type
+		"wet",         # property
+		0,             # from current value
+		1,             # to
+		2.0,           # duration
+		1,             # transition type
+		chorus_tween.EASE_IN, # ease type
 		0              # delay
 	)
-	tween.start()
+	chorus_tween.start()
+
+
+func stop_chorus():
+	chorus.wet = 0
+	chorus.dry = 1

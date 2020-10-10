@@ -13,17 +13,18 @@ func change_score(s):
 
 func increment_score(amount : int = 1):
 	change_score(score + amount)
-	print("score is now: ", str(score))
 
 # setting health
 func decrement_health():
 	if health > 1:
 		health -= 1
+		MusicManager.change_music_layer()
 	else:
 		print("You lose")
-		get_tree().change_scene("res://Scenes/Lost/Lost.tscn")
+		var _scene_data = get_tree().change_scene("res://Scenes/Lost/Lost.tscn")
 		
 
 func reset():
 	change_score(0)
 	health = MAX_HEALTH
+	MusicManager.reset_music_layers()
