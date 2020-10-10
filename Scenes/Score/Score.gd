@@ -28,3 +28,16 @@ func reset():
 	change_score(0)
 	health = MAX_HEALTH
 	MusicManager.reset_music_layers()
+
+
+func _process(_delta):
+	self.change_color()
+
+# keep track of color as it tweens
+var c : float = 0.9
+func change_color():
+	# target color based on health
+	var t : float = float(health) / float(MAX_HEALTH)
+	c += (t - c) * 0.01
+	# change background color
+	VisualServer.set_default_clear_color(Color(c, c*0.97, c*0.94))
