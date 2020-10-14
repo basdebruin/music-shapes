@@ -7,6 +7,10 @@ onready var chorus = AudioServer.get_bus_effect(AudioServer.get_bus_index("Music
 
 onready var chorus_tween = $ChorusTween
 
+onready var game_over_sound = $GameOver
+
+onready var score_chords = $ScoreIncrease
+
 var current_music_layer = 0
 
 func _ready():
@@ -67,5 +71,32 @@ func start_chorus():
 
 
 func stop_chorus():
-	chorus.wet = 0
-	chorus.dry = 1
+	#tween chorus to min
+	chorus_tween.interpolate_property(
+		chorus,        # context
+		"dry",         # property
+		0,             # from current value
+		1,             # to
+		2.0,           # duration
+		1,             # transition type
+		chorus_tween.EASE_IN, # ease type
+		0              # delay
+	)
+	
+	chorus_tween.interpolate_property(
+		chorus,        # context
+		"wet",         # property
+		1,             # from current value
+		0,             # to
+		2.0,           # duration
+		1,             # transition type
+		chorus_tween.EASE_IN, # ease type
+		0              # delay
+	)
+	chorus_tween.start()
+	
+func _play_chord(child):
+	#get the children
+	#play the chord
+	score_chords.get_child(child).play()
+	

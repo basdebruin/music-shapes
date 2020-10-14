@@ -10,6 +10,9 @@ func _ready():
 # setting score
 func change_score(s):
 	score = s
+	if score % 10 == 0:
+		MusicManager._play_chord(score / 10)
+		print("score chord", str(score / 10))
 
 func increment_score(amount : int = 1):
 	change_score(score + amount)
@@ -22,6 +25,7 @@ func decrement_health():
 	else:
 		print("You lose")
 		var _scene_data = get_tree().change_scene("res://Scenes/Lost/Lost.tscn")
+		MusicManager.game_over_sound.play()
 		
 
 func reset():

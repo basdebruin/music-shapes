@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/score_increase_chord-002.wav-5eee943f8e32176eed7557dda7717fc0.sample"
+
+[deps]
+
+source_file="res://Audio/Assets/ScoreChords/score_increase_chord-002.wav"
+dest_files=[ "res://.import/score_increase_chord-002.wav-5eee943f8e32176eed7557dda7717fc0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -2,8 +2,8 @@ extends Node2D
 
 # timer variables
 
-const TIMER_STARTING_INTERVAL   : float = 3.0   # how long between spawns at beginning
-const TIMER_DECREASE_MULTIPLIER : float = 0.8
+const TIMER_STARTING_INTERVAL   : float = 2.5   # how long between spawns at beginning
+const TIMER_DECREASE_MULTIPLIER : float = 0.9
 var   timer_tipping_point       : float = 1.0   # the current lowest spawn interval
 var   timer_current_value       : float = TIMER_STARTING_INTERVAL   # the current value
 # subtimer
